@@ -1,7 +1,7 @@
 {
   "name": "netlevel",
   "version": "1.0.0",
-  "description": "",
+  "description": "<p align=\"center\">     <img src=\"./assets/lurkr.png\" width=100>     <img src=\"./assets/mee6.png\" width=100>     <h3 align=\"center\">The Mee6 and Lurkr Leveling system clone</h3> </p>",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && node ."
@@ -19,7 +19,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/uuid": "^9.0.3",
-    "prisma": "^5.2.0"
+    "prisma": "^5.2.0",
+    "typescript": "^5.3.3"
   }
 }
