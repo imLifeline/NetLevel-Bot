@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType } from "discord.js";
 import { NetLevelBotCommand } from "../../class/Builders";
 import { fetchMee6Leaderboard, wait } from "../../util/functions";
-
+import quickmongo from "quickmongo";
 export default new NetLevelBotCommand({
     type: 1,
     structure: {
@@ -79,24 +79,22 @@ export default new NetLevelBotCommand({
                 content: `Successfully imported **${arr.length}** user\'s XP, saving into the database...`
             }).catch(null); 
 
-            await client.prisma.user.deleteMany({
-                where: {
-                    guildId: interaction.guild.id
-                }
+            const db = new quickmongo(process.env.MONGO_URI); // Replace with your MongoDB URI
+
+            await db.deleteMany({
+                guildId: interaction.guild.id
             });
 
             for (const each of arr) {
-                await client.prisma.user.create({
-                    data: {
-                        guildId: interaction.guild.id,
-                        level: each.level,
-                        levelXp: each.xp.levelXp,
-                        totalXp: each.xp.totalXp,
-                        xp: each.xp.userXp,
-                        messageCount: each.messageCount,
-                        rank: each.rank,
-                        userId: each.id
-                    }
+                await db.insertOne({
+                    guildId: interaction.guild.id,
+                    level: each.level,
+                    levelXp: each.xp.levelXp,
+                    totalXp: each.xp.totalXp,
+                    xp: each.xp.userXp,
+                    messageCount: each.messageCount,
+                    rank: each.rank,
+                    userId: each.id
                 });
             };
 
