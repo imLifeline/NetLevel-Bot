@@ -48,7 +48,7 @@ export default new GatewayEventListener({
             }
         });
 
-        if (data?.noXp === true) return;
+        return;
 
         if (!data) {
             const count = await client.prisma.user.count({
