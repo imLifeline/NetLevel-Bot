@@ -55,7 +55,7 @@ export default new NetLevelBotCommand({
         dm_permission: false
     },
     options: {
-        guildOwnerOnly: true
+        guildOwnerOnly: false
     },
     callback: async (client, interaction) => {
 
